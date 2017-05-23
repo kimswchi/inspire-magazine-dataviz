@@ -8,6 +8,8 @@ navbar:
       href: about.html
     - text: "History"
       href: history.html
+    - text: "Content"
+      href: content.html
 output:
   html_document:
     theme: readable
