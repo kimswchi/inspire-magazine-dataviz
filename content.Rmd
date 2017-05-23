@@ -1,5 +1,5 @@
 ---
-title: "History"
+title: "Content"
 ---
 
 More about this website.
