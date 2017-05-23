@@ -6,6 +6,8 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "History"
+      href: history.html
 output:
   html_document:
     theme: readable
