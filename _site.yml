@@ -1,6 +1,6 @@
-name: "my-website"
+name: "Inspire Magazine"
 navbar:
-  title: "My Website"
+  title: "Inspire Magazine"
   left:
     - text: "Home"
       href: index.html
@@ -10,6 +10,8 @@ navbar:
       href: history.html
     - text: "Content"
       href: content.html
+    - text: "Authorship"
+      href: authorship.html
 output:
   html_document:
     theme: readable
