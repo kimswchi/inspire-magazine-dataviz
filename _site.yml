@@ -1,13 +1,11 @@
 name: "Inspire Magazine"
 navbar:
-  title: "Inspire Magazine"
+  title: "Inspire Illuminated"
   left:
     - text: "Home"
       href: index.html
     - text: "About Inspire"
       href: about.html
-    - text: "History"
-      href: history.html
     - text: "Content"
       href: content.html
     - text: "Authorship"
