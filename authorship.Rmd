@@ -98,7 +98,8 @@ authors <- ggplot(authors_all_issues, aes(n, AuthorName)) +
   theme_minimal() + 
   theme(plot.title = element_text(size = 14),
         axis.title = element_text(size = 12),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank())
 
 pauthors <- plotly_build(authors)
 

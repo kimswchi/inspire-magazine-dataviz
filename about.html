@@ -20,6 +20,13 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<link href="site_libs/plotlyjs-1.26.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotlyjs-1.26.1/plotly-latest.min.js"></script>
+<script src="site_libs/plotly-binding-4.6.0/plotly.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
 
 
 
@@ -195,10 +202,11 @@ $(document).ready(function () {
 <p><em>Inspire</em> is an online English-language magazine published by one of al-Qaeda’s main franchises, al-Qaeda in the Arabian Peninsula (AQAP). AQAP operates primarily in Yemen and Saudi Arabia, but has drawn attention for attempting various terrorist plots against Western targets in the Arabian peninsula and abroad. Since their creation in 2009, they have attempted multiple times to blow up planes and have conducted numerous deadly attacks against security personnel. In 2015, the group claimed responsibility for the shooting attack on the headquarters of the satirical newspaper Charlie Hebdo in Paris.</p>
 <p><img src="pics/InspireWinter2013-1.png" /><img src="pics/CompleteInspire_Page_31.jpg" /></p>
 <p>AQAP first published <em>Inspire</em> in July 2010, and currently there are 16 issues, the most recent having been issued in November 2016. A principal aim of <em>Inspire</em> is to recruit and mobilize helpers from English-speaking countries, and to encourage them to carry out attacks domestically as well as to join their militia in the Middle East. <em>Inspire</em> famously dedicates a section of each issue to a concept they call “Open Source Jihad”, or detailed how-to-guides for conducting domestic terrorist attacks. Dzhokhar Tsarnaev, the surviving Boston marathon bomber, claimed to have learned bomb-making from one of the <em>Inspire</em> guides.</p>
-<table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table style="width:100%; margin-left: auto; margin-right: auto;" class="table table-hover table-condensed">
 <thead>
 <tr>
-<th style="text-align:right;">
+<th style="text-align:left;">
 Issue
 </th>
 <th style="text-align:left;">
@@ -207,14 +215,14 @@ Cover Story
 <th style="text-align:left;">
 Release Date
 </th>
-<th style="text-align:right;">
+<th style="text-align:left;">
 # Pages
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 1
 </td>
 <td style="text-align:left;">
@@ -223,12 +231,12 @@ May our souls be sacrified for you! - Shaykh Anwar al-Awlaki
 <td style="text-align:left;">
 Jun 2010
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 66
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 2
 </td>
 <td style="text-align:left;">
@@ -237,12 +245,12 @@ Photos from the Operations of Abyan
 <td style="text-align:left;">
 Oct 2010
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 73
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 3
 </td>
 <td style="text-align:left;">
@@ -251,12 +259,12 @@ $4,200
 <td style="text-align:left;">
 Nov 2010
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 22
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 4
 </td>
 <td style="text-align:left;">
@@ -265,12 +273,12 @@ The Ruling on Dispossessing the Disbelievers Wealth in Dar al-Harb
 <td style="text-align:left;">
 Jan 2011
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 66
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 5
 </td>
 <td style="text-align:left;">
@@ -279,12 +287,12 @@ The Tsunami of Change
 <td style="text-align:left;">
 Mar 2011
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 69
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 6
 </td>
 <td style="text-align:left;">
@@ -293,12 +301,12 @@ Sadness, Contentment and Aspiration
 <td style="text-align:left;">
 Jul 2011
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 60
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 7
 </td>
 <td style="text-align:left;">
@@ -307,12 +315,12 @@ The Greatest Special Operation of All Time
 <td style="text-align:left;">
 Sep 2011
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 37
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 8
 </td>
 <td style="text-align:left;">
@@ -321,12 +329,12 @@ Targeting Dar al-Harb Populations
 <td style="text-align:left;">
 May 2012
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 62
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 9
 </td>
 <td style="text-align:left;">
@@ -335,12 +343,12 @@ Wining on the Ground
 <td style="text-align:left;">
 May 2012
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 61
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 10
 </td>
 <td style="text-align:left;">
@@ -349,12 +357,12 @@ We Are All Usama
 <td style="text-align:left;">
 Mar 2013
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 60
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 11
 </td>
 <td style="text-align:left;">
@@ -363,12 +371,12 @@ Who and Why
 <td style="text-align:left;">
 May 2013
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 38
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 12
 </td>
 <td style="text-align:left;">
@@ -377,12 +385,12 @@ Shattered: A Story About Change
 <td style="text-align:left;">
 Mar 2014
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 71
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 13
 </td>
 <td style="text-align:left;">
@@ -391,12 +399,12 @@ Neurotmesis: Cutting the Nerves and Isolating the Head
 <td style="text-align:left;">
 Dec 2014
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 111
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 14
 </td>
 <td style="text-align:left;">
@@ -405,12 +413,12 @@ Assassination Operations
 <td style="text-align:left;">
 Sep 2015
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 87
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 15
 </td>
 <td style="text-align:left;">
@@ -419,12 +427,12 @@ Professional Assassinations
 <td style="text-align:left;">
 May 2016
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 89
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
+<td style="text-align:left;">
 16
 </td>
 <td style="text-align:left;">
@@ -433,7 +441,7 @@ The 9/17 Operations
 <td style="text-align:left;">
 Nov 2016
 </td>
-<td style="text-align:right;">
+<td style="text-align:left;">
 47
 </td>
 </tr>
@@ -446,6 +454,8 @@ Nov 2016
 <li>On Christmas Day of 2009, Umar Farouk Abdulmutallab (“Underwear Bomber”) attempted and failed to detonate explosives in his underwear while onboard a plane flying to Detroit, Michigan. AQAP claimed to have coordinated the attack.</li>
 <li>etc.</li>
 </ul>
+<div id="58983c4069b2" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="58983c4069b2">{"x":{"data":[{"x":[14603,14603,null,14761,14761,null,14883,14883,null,14911,14911,null,14914,14914,null,14975,14975,null,15034,15034,null,15096,15096,null,15156,15156,null,15247,15247,null,15218,15218,null,15261,15261,null,15461,15461,null,15462,15462,null,15481,15481,null,15765,15765,null,15826,15826,null,16044,16044,null,16130,16130,null,16405,16405,null,16410,16410,null,16442,16442,null,16541,16541,null,16679,16679,null,16771,16771,null,16851,16851,null,16916,16916,null,16922,16922,null,17106,17106],"y":[1,0,null,0,0,null,0,0,null,1,0,null,0,0,null,0,0,null,0,0,null,2,0,null,0,0,null,2,0,null,0,0,null,2,0,null,0,0,null,0,0,null,1,0,null,0,0,null,0,0,null,1,0,null,0,0,null,0,0,null,2,0,null,1,0,null,1,0,null,0,0,null,1,0,null,1,0,null,2,0,null,0,0,null,0,0],"text":["Date: 2009-12-25<br />Disp: 1<br />Date: 14603","Date: 2009-12-25<br />Disp: 1<br />Date: 14603",null,"Date: 2010-06-01<br />Disp: 0<br />Date: 14761","Date: 2010-06-01<br />Disp: 0<br />Date: 14761",null,"Date: 2010-10-01<br />Disp: 0<br />Date: 14883","Date: 2010-10-01<br />Disp: 0<br />Date: 14883",null,"Date: 2010-10-29<br />Disp: 1<br />Date: 14911","Date: 2010-10-29<br />Disp: 1<br />Date: 14911",null,"Date: 2010-11-01<br />Disp: 0<br />Date: 14914","Date: 2010-11-01<br />Disp: 0<br />Date: 14914",null,"Date: 2011-01-01<br />Disp: 0<br />Date: 14975","Date: 2011-01-01<br />Disp: 0<br />Date: 14975",null,"Date: 2011-03-01<br />Disp: 0<br />Date: 15034","Date: 2011-03-01<br />Disp: 0<br />Date: 15034",null,"Date: 2011-05-02<br />Disp: 2<br />Date: 15096","Date: 2011-05-02<br />Disp: 2<br />Date: 15096",null,"Date: 2011-07-01<br />Disp: 0<br />Date: 15156","Date: 2011-07-01<br />Disp: 0<br />Date: 15156",null,"Date: 2011-09-30<br />Disp: 2<br />Date: 15247","Date: 2011-09-30<br />Disp: 2<br />Date: 15247",null,"Date: 2011-09-01<br />Disp: 0<br />Date: 15218","Date: 2011-09-01<br />Disp: 0<br />Date: 15218",null,"Date: 2011-10-14<br />Disp: 2<br />Date: 15261","Date: 2011-10-14<br />Disp: 2<br />Date: 15261",null,"Date: 2012-05-01<br />Disp: 0<br />Date: 15461","Date: 2012-05-01<br />Disp: 0<br />Date: 15461",null,"Date: 2012-05-02<br />Disp: 0<br />Date: 15462","Date: 2012-05-02<br />Disp: 0<br />Date: 15462",null,"Date: 2012-05-21<br />Disp: 1<br />Date: 15481","Date: 2012-05-21<br />Disp: 1<br />Date: 15481",null,"Date: 2013-03-01<br />Disp: 0<br />Date: 15765","Date: 2013-03-01<br />Disp: 0<br />Date: 15765",null,"Date: 2013-05-01<br />Disp: 0<br />Date: 15826","Date: 2013-05-01<br />Disp: 0<br />Date: 15826",null,"Date: 2013-12-05<br />Disp: 1<br />Date: 16044","Date: 2013-12-05<br />Disp: 1<br />Date: 16044",null,"Date: 2014-03-01<br />Disp: 0<br />Date: 16130","Date: 2014-03-01<br />Disp: 0<br />Date: 16130",null,"Date: 2014-12-01<br />Disp: 0<br />Date: 16405","Date: 2014-12-01<br />Disp: 0<br />Date: 16405",null,"Date: 2014-12-06<br />Disp: 2<br />Date: 16410","Date: 2014-12-06<br />Disp: 2<br />Date: 16410",null,"Date: 2015-01-07<br />Disp: 1<br />Date: 16442","Date: 2015-01-07<br />Disp: 1<br />Date: 16442",null,"Date: 2015-04-16<br />Disp: 1<br />Date: 16541","Date: 2015-04-16<br />Disp: 1<br />Date: 16541",null,"Date: 2015-09-01<br />Disp: 0<br />Date: 16679","Date: 2015-09-01<br />Disp: 0<br />Date: 16679",null,"Date: 2015-12-02<br />Disp: 1<br />Date: 16771","Date: 2015-12-02<br />Disp: 1<br />Date: 16771",null,"Date: 2016-02-20<br />Disp: 1<br />Date: 16851","Date: 2016-02-20<br />Disp: 1<br />Date: 16851",null,"Date: 2016-04-25<br />Disp: 2<br />Date: 16916","Date: 2016-04-25<br />Disp: 2<br />Date: 16916",null,"Date: 2016-05-01<br />Disp: 0<br />Date: 16922","Date: 2016-05-01<br />Disp: 0<br />Date: 16922",null,"Date: 2016-11-01<br />Disp: 0<br />Date: 17106","Date: 2016-11-01<br />Disp: 0<br />Date: 17106"],"type":"scatter","mode":"lines","line":{"width":0.302362204724409,"color":"rgba(0,0,0,0.5)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166,null,14543,17166],"y":[0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0,null,0,0],"text":"Date[1] - 60: 2009-10-26<br />0: 0<br />Date[length(Date)] + 60: 17166","type":"scatter","mode":"lines","line":{"width":0.302362204724409,"color":"rgba(0,0,0,0.5)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543,null,14543,14543],"y":[-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0],"text":"Date[1] - 60: 2009-10-26<br />-0.1: -0.1<br />Date[1] - 60: 14543","type":"scatter","mode":"lines","line":{"width":0.302362204724409,"color":"rgba(0,0,0,0.5)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166,null,17166,17166],"y":[-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0,null,-0.1,0],"text":"Date[length(Date)] + 60: 2016-12-31<br />-0.1: -0.1<br />Date[length(Date)] + 60: 17166","type":"scatter","mode":"lines","line":{"width":0.302362204724409,"color":"rgba(0,0,0,0.5)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[14610,14610,null,14975,14975,null,15340,15340,null,15706,15706,null,16071,16071,null,16436,16436,null,16801,16801,null,17167,17167],"y":[0,-0.1,null,0,-0.1,null,0,-0.1,null,0,-0.1,null,0,-0.1,null,0,-0.1,null,0,-0.1,null,0,-0.1],"text":["date: 2010-01-01<br />0: 0<br />date: 14610<br />-0.1: -0.1","date: 2010-01-01<br />0: 0<br />date: 14610<br />-0.1: -0.1",null,"date: 2011-01-01<br />0: 0<br />date: 14975<br />-0.1: -0.1","date: 2011-01-01<br />0: 0<br />date: 14975<br />-0.1: -0.1",null,"date: 2012-01-01<br />0: 0<br />date: 15340<br />-0.1: -0.1","date: 2012-01-01<br />0: 0<br />date: 15340<br />-0.1: -0.1",null,"date: 2013-01-01<br />0: 0<br />date: 15706<br />-0.1: -0.1","date: 2013-01-01<br />0: 0<br />date: 15706<br />-0.1: -0.1",null,"date: 2014-01-01<br />0: 0<br />date: 16071<br />-0.1: -0.1","date: 2014-01-01<br />0: 0<br />date: 16071<br />-0.1: -0.1",null,"date: 2015-01-01<br />0: 0<br />date: 16436<br />-0.1: -0.1","date: 2015-01-01<br />0: 0<br />date: 16436<br />-0.1: -0.1",null,"date: 2016-01-01<br />0: 0<br />date: 16801<br />-0.1: -0.1","date: 2016-01-01<br />0: 0<br />date: 16801<br />-0.1: -0.1",null,"date: 2017-01-01<br />0: 0<br />date: 17167<br />-0.1: -0.1","date: 2017-01-01<br />0: 0<br />date: 17167<br />-0.1: -0.1"],"type":"scatter","mode":"lines","line":{"width":0.302362204724409,"color":"rgba(0,0,0,0.5)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[14603,14911,15481,16044,16442,16541,16771,16851],"y":[1,1,1,1,1,1,1,1],"text":["Date: 2009-12-25<br />Disp: 1<br />Type: AQAP Offensive","Date: 2010-10-29<br />Disp: 1<br />Type: AQAP Offensive","Date: 2012-05-21<br />Disp: 1<br />Type: AQAP Offensive","Date: 2013-12-05<br />Disp: 1<br />Type: AQAP Offensive","Date: 2015-01-07<br />Disp: 1<br />Type: AQAP Offensive","Date: 2015-04-16<br />Disp: 1<br />Type: AQAP Offensive","Date: 2015-12-02<br />Disp: 1<br />Type: AQAP Offensive","Date: 2016-02-20<br />Disp: 1<br />Type: AQAP Offensive"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(204,40,16,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(204,40,16,1)"}},"hoveron":"points","name":"AQAP Offensive","legendgroup":"AQAP Offensive","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[15096,15247,15261,16410,16916],"y":[2,2,2,2,2],"text":["Date: 2011-05-02<br />Disp: 2<br />Type: Counter-terror","Date: 2011-09-30<br />Disp: 2<br />Type: Counter-terror","Date: 2011-10-14<br />Disp: 2<br />Type: Counter-terror","Date: 2014-12-06<br />Disp: 2<br />Type: Counter-terror","Date: 2016-04-25<br />Disp: 2<br />Type: Counter-terror"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(70,141,255,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(70,141,255,1)"}},"hoveron":"points","name":"Counter-terror","legendgroup":"Counter-terror","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[14761,14883,14914,14975,15034,15156,15218,15461,15462,15765,15826,16130,16405,16679,16922,17106],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"text":["Date: 2010-06-01<br />Disp: 0<br />Type: Inspire","Date: 2010-10-01<br />Disp: 0<br />Type: Inspire","Date: 2010-11-01<br />Disp: 0<br />Type: Inspire","Date: 2011-01-01<br />Disp: 0<br />Type: Inspire","Date: 2011-03-01<br />Disp: 0<br />Type: Inspire","Date: 2011-07-01<br />Disp: 0<br />Type: Inspire","Date: 2011-09-01<br />Disp: 0<br />Type: Inspire","Date: 2012-05-01<br />Disp: 0<br />Type: Inspire","Date: 2012-05-02<br />Disp: 0<br />Type: Inspire","Date: 2013-03-01<br />Disp: 0<br />Type: Inspire","Date: 2013-05-01<br />Disp: 0<br />Type: Inspire","Date: 2014-03-01<br />Disp: 0<br />Type: Inspire","Date: 2014-12-01<br />Disp: 0<br />Type: Inspire","Date: 2015-09-01<br />Disp: 0<br />Type: Inspire","Date: 2016-05-01<br />Disp: 0<br />Type: Inspire","Date: 2016-11-01<br />Disp: 0<br />Type: Inspire"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(195,255,28,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(195,255,28,1)"}},"hoveron":"points","name":"Inspire","legendgroup":"Inspire","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.2754946727549,"r":7.30593607305936,"b":25.0837138508371,"l":10.958904109589},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":"Timeline of events","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"xaxis":{"domain":[0,1],"type":"linear","autorange":false,"range":[14378.85,17330.15],"tickmode":"array","ticktext":["2010","2011","2012","2013","2014","2015","2016","2017"],"tickvals":[14610,14975,15340,15706,16071,16436,16801,17167],"categoryorder":"array","categoryarray":["2010","2011","2012","2013","2014","2015","2016","2017"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":"","titlefont":{"color":null,"family":null,"size":0},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"type":"linear","autorange":false,"range":[-0.255,3.155],"tickmode":"array","ticktext":["0","1","2","3"],"tickvals":[0,1,2,3],"categoryorder":"array","categoryarray":["0","1","2","3"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":false,"tickfont":{"color":null,"family":null,"size":0},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":"","titlefont":{"color":null,"family":null,"size":0},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.98,"x":0.05},"annotations":[{"text":"Type","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"58983d912141":{"x":{},"y":{},"xend":{},"type":"scatter"},"58987ef1b78":{"x":{},"y":{},"xend":{}},"5898720b7be8":{"x":{},"y":{},"xend":{}},"589826c72efc":{"x":{},"y":{},"xend":{}},"589821414d7f":{"x":{},"y":{},"xend":{},"yend":{}},"5898431d37a8":{"x":{},"y":{},"colour":{}}},"cur_data":"58983d912141","visdat":{"58983d912141":["function (y) ","x"],"58987ef1b78":["function (y) ","x"],"5898720b7be8":["function (y) ","x"],"589826c72efc":["function (y) ","x"],"589821414d7f":["function (y) ","x"],"5898431d37a8":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1}},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":{"render":[{"code":"function(el, x) { var ctConfig = crosstalk.var('plotlyCrosstalkOpts').set({\"on\":\"plotly_click\",\"persistent\":false,\"dynamic\":false,\"selectize\":false,\"opacityDim\":0.2,\"selected\":{\"opacity\":1}}); }","data":null},{"code":"function(el, x) { var ctConfig = crosstalk.var('plotlyCrosstalkOpts').set({\"on\":\"plotly_click\",\"persistent\":false,\"dynamic\":false,\"selectize\":false,\"opacityDim\":0.2,\"selected\":{\"opacity\":1}}); }","data":null}]}}</script>
 
 
 

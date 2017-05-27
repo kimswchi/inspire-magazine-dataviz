@@ -43,17 +43,22 @@ cat_type <- catalogue %>%
   transform(ItemType = factor(ItemType, levels = ItemType))
 
 cat_all <- ggplot(cat_type, aes(ItemType, page_freq_weight)) + 
-  geom_point(color = "#5F9F9F") + 
+  geom_point(color = "#4f86f7", size = 2) + 
   geom_segment(aes(x = ItemType, y = 0, xend = ItemType, yend = page_freq_weight - 0.005),
-               color = "#999999") + 
-  labs(title = "Percentage of articles written for Inspire, by issue",
-       x = "Issue", y = "Percentage of articles") + 
+               color = "#C0C0C0") + 
+  labs(title = "Distribution of categories",
+       x = "Category", y = "Percentage of pages") + 
   scale_y_continuous(limits = c(0, 0.3), breaks = seq(0, 0.3, .1), labels=percent) + 
-  theme(panel.grid.minor = element_blank(),
-        panel.grid.major.x = element_blank(),
-        axis.text.x = element_text(angle = -60, hjust = 0.3))
+  #scale_color_manual(values = c("#AA4499", "#882255", "#AA4466", "#CC6677", "#661100", "#DDCC77", "#999933", #"#117733", "#44AA99", "#88CCEE", "#6699CC", "#332288")) + 
+  theme(panel.grid.major.x = element_blank(),
+        axis.text.x = element_text(angle = -60, hjust = 0.3),
+        axis.title.x = element_blank())
 
 pcat_all <- plotly_build(cat_all)
+
+pcat_all$x$layout$margin$b <- 120
+pcat_all$x$layout$margin$l <- 60
+pcat_all$x$layout$showlegend <- FALSE
 
 pcat_all
 ```
@@ -151,3 +156,5 @@ pcat_issue <- plotly_build(cat_issue)
 
 pcat_issue
 ```
+
+
