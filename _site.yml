@@ -6,10 +6,10 @@ navbar:
       href: index.html
     - text: "About Inspire"
       href: about.html
-    - text: "Content"
-      href: content.html
-    - text: "Authorship"
-      href: authorship.html
+#    - text: "Content"
+#      href: content.html
+#    - text: "Authorship"
+#      href: authorship.html
 output:
   html_document:
     theme: readable
