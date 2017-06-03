@@ -1,30 +1,30 @@
-Date,Event,Disp,Type,,,,,,
-12/25/2009,Underwear Bomber,0.5,AQAP Offensive,,,,,,
-6/1/2010,1,0,Inspire,,,,,,
-10/1/2010,2,0,Inspire,,,,,,
-10/29/2010,Cargo planes<br />bomb plot,0.5,AQAP Offensive,,,,,,
-11/1/2010,3,0,Inspire,,,,,,
-1/1/2011,4,0,Inspire,,,,,,
-3/1/2011,5,0,Inspire,,,,,,
-5/2/2011,Usama bin Laden killed,1,Counter-terror,,,,,,
-7/1/2011,6,0,Inspire,,,,,,
-9/30/2011,Anwar al-Awlaki and Samir Khan killed,1,Counter-terror,,,,,,
-9/1/2011,7,0,Inspire,,,,,,
-10/14/2011,16-year old Abdulrahman al-Awlaki<br />killed in drone strike,1,Counter-terror,,,,,,
-5/1/2012,8,0,Inspire,,,,,,
-5/2/2012,9,0,Inspire,,,,,,
-5/21/2012,Suicide attack<br />on Yemeni soldiers<br />kills over 120,0.5,AQAP Offensive,,,,,,
-3/1/2013,10,0,Inspire,,,,,,
-5/1/2013,11,0,Inspire,,,,,,
-12/5/2013,Attack on<br />Yemeni Defense Ministry<br />kills over 50,0.5,AQAP Offensive,,,,,,
-3/1/2014,12,0,Inspire,,,,,,
-12/1/2014,13,0,Inspire,,,,,,
-12/6/2014,US-led hostage rescue operation;<br />death of Luke Somers,1,Counter-terror,,,,,,
-1/7/2015,Charlie Hebdo shooting,0.5,AQAP Offensive,,,,,,
-4/16/2015,Mukalla captured,0.5,AQAP Offensive,,,,,,
-9/1/2015,14,0,Inspire,,,,,,
-12/2/2015,Zinjibar and Jaar captured,0.5,AQAP Offensive,,,,,,
-2/20/2016,Southern Abyan<br />captured,0.5,AQAP Offensive,,,,,,
-4/25/2016,Saudi coalition<br />recaptures Mukalla,1,Counter-terror,,,,,,
-5/1/2016,15,0,Inspire,,,,,,
-11/1/2016,16,0,Inspire,,,,,,
+Date,Event,Disp,Type,Disp2,Description
+12/25/2009,Underwear\nBomber,0.5,AQAP offensive,0.8,"A 23-year-old Nigerian man named Umar Farouk Abdulmutallab attempted and failed to detonate<br />explosives hidden in his underwear while onboard a plane flying to Detroit, Michigan. Abdulmutallab<br />claimed ties to al-Qaeda and AQAP later claimed to have orchestrated the plot. Abdulmutallab was<br />popularly referred to in the media as the ''Underwear Bomber''.<br /><br />Abdulmutallab, though unsuccessful in his attempt, was praised as a ''heroic martyrdom bomber''<br />in the first issue of <Inspire>. In this issue, AQAP also claimed to have developed an ''advanced<br />bomb'' capable of passing through airport security systems undetected, which supposedly enabled<br />Abdulmutallab to board the plane. Only a ''technical glitch'' prevented the bomb from exploding co-<br />mpletely, they said."
+6/1/2010,1,0,Inspire publication,0,Issue 1 released
+10/1/2010,2,0,Inspire publication,0,Issue 2 released
+10/29/2010,Cargo planes<br />bomb plot,0.5,AQAP offensive,0.8,"Tipped off by Saudi Arabia, authorities in the UK and UAE discovered explosives<br />hidden inside two packages en route from Yemen to Chicago, Illinois. Each bomb<br />had been disguised as a toner cartridge and placed inside a laser printer, which<br />was then shipped off via FedEx and UPS. AQAP claimed responsibility for the plot.<br /><br />In issue 3 of <Inspire>, the writers described the technical details of the plot, inclu-<br />ding their methods for bypassing airline security checks. In the same issue, they<br />also claimed responsibility for the crash of UPS Airlines Flight 6."
+11/1/2010,3,0,Inspire publication,0,Issue 3 released
+1/1/2011,4,0,Inspire publication,0,Issue 4 released
+3/1/2011,5,0,Inspire publication,0,Issue 5 released
+5/2/2011,Usama bin Laden killed,1,Counter-terror operation,1.8,
+7/1/2011,6,0,Inspire publication,0,Issue 6 released
+9/30/2011,Anwar al-Awlaki and Samir Khan killed,1,Counter-terror operation,2.2,
+9/1/2011,7,0,Inspire publication,0,Issue 7 released
+10/14/2011,16-year old Abdulrahman al-Awlaki<br />killed in drone strike,1,Counter-terror operation,2.6,
+5/1/2012,8,0,Inspire publication,0,Issue 8 released
+5/2/2012,9,0,Inspire publication,0,Issue 9 released
+5/21/2012,2012 Sana'a bombing,0.5,AQAP offensive,0.2,"A rogue soldier detonated a belt bomb amidst Yemeni Army<br />soldiers practicing for the Unity Day military parade, killing<br />more than 120 people and injuring hundreds. Al Jazeera re-<br />ported the bombing was the deadliest in Yemen's history.<br />AQAP's insurgent arm Ansar al-Sharia claimed responsibi-<br />lity for the attack."
+3/1/2013,10,0,Inspire publication,0,Issue 10 released
+5/1/2013,11,0,Inspire publication,0,Issue 11 released
+12/5/2013,2013 Sana'a attack,0.5,AQAP offensive,0.8,"A group of 12 men, mostly of Saudi origin,<br />attacked the Yemeni Defense Ministry in<br />Sana'a with guns and a suicide bombing.<br />More than 50 people were killed and over<br />100 injured as a result of the attack. Twel-<br />ve were foreigners, including medical wo-<br />rkers at the ministry's hospital. AQAP's<br />insurgent arm Ansar al-Sharia claimed re-<br />sponsibility for the attack.<br /><br />AQAP later issued a formal apology for<br />the deaths at the ministry hospital."
+3/1/2014,12,0,Inspire publication,0,Issue 12 released
+12/1/2014,13,0,Inspire publication,0,Issue 13 released
+12/6/2014,US-led hostage rescue operation;<br />death of Luke Somers,1,Counter-terror operation,1.8,
+1/7/2015,Charlie Hebdo shooting,0.5,AQAP offensive,0.6,
+4/16/2015,Mukalla captured,0.5,AQAP offensive,0.2,
+9/1/2015,14,0,Inspire publication,0,Issue 14 released
+12/2/2015,Zinjibar and Jaar captured,0.5,AQAP offensive,0.4,
+2/20/2016,Southern Abyan<br />captured,0.5,AQAP offensive,0.8,
+4/25/2016,Saudi coalition<br />recaptures Mukalla,1,Counter-terror operation,2.4,
+5/1/2016,15,0,Inspire publication,0,Issue 15 released
+11/1/2016,16,0,Inspire publication,0,Issue 16 released

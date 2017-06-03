@@ -9,7 +9,6 @@ library(plotly)
 library(scales)
 library(ggthemes)
 library(lubridate)
-library(knitr)
 library(stringr)
 library(kableExtra)
 
@@ -25,7 +24,7 @@ hist <- read.csv("Data/inspire_issues.csv") %>%
 
 *Inspire* is an online English-language magazine published by one of al-Qaeda's main franchises, al-Qaeda in the Arabian Peninsula (AQAP). AQAP operates primarily in Yemen and Saudi Arabia, but has drawn attention for attempting various terrorist plots against Western targets in the Arabian peninsula and abroad. Since their creation in 2009, they have attempted multiple times to blow up planes and have conducted numerous deadly attacks against security personnel. In 2015, the group claimed responsibility for the shooting attack on the headquarters of the satirical newspaper Charlie Hebdo in Paris. 
 
-![](pics/InspireWinter2013-1.png)![](pics/CompleteInspire_Page_31.jpg)
+![](pics/usama_small2.png)![](pics/osj_small2.jpg)
 
 AQAP first published *Inspire* in July 2010, and currently there are 16 issues, the most recent having been issued in November 2016. A principal aim of *Inspire* is to recruit and mobilize helpers from English-speaking countries, and to encourage them to carry out attacks domestically as well as to join their militia in the Middle East. *Inspire* famously dedicates a section of each issue to a concept they call "Open Source Jihad", or detailed how-to-guides for conducting domestic terrorist attacks. Dzhokhar Tsarnaev, the surviving Boston marathon bomber, claimed to have learned bomb-making from one of the *Inspire* guides.
 
@@ -102,7 +101,17 @@ Description of events:
 timeline2 <- read.csv("Data/timeline2.csv") %>%
   transform(Date = as.Date(Date, "%m/%d/%Y")) %>%
   transform(Event = as.character(Event)) %>%
-  transform(Event = str_replace_all(Event, "<br />", "\n"))
+  transform(Event = str_replace_all(Event, "<br />", "\n")) %>%
+  transform(Type = factor(Type, levels = c("Counter-terror operation",
+                                           "AQAP offensive",
+                                           "Inspire publication"))) %>%
+  mutate(DescriptionDate = ifelse(Type == "Inspire publication",
+                                  paste(month(Date, label=TRUE, abbr=FALSE), year(Date)),
+                                  paste0(month(Date, label=TRUE, abbr=FALSE), " ", day(Date), ", ", 
+                                  year(Date)))) %>%
+  transform(DescriptionDate = paste0(DescriptionDate, ":\n\n")) %>%
+  transform(Description = paste0(DescriptionDate, Description)) %>%
+  transform(Description = str_replace_all(Description, "<br />", "\n"))
 
 years <- data.frame(c("1/1/2010", "1/1/2011", "1/1/2012", "1/1/2013", "1/1/2014", "1/1/2015",
            "1/1/2016", "1/1/2017"))
@@ -111,7 +120,7 @@ years <- years %>%
   transform(date = as.Date(date, "%m/%d/%Y"))
 
 timeline <- ggplot() + 
-  geom_segment(aes(x = Date, y = Disp, xend = Date), data = timeline2, yend = 0,
+  geom_segment(aes(x = Date, y = Disp2, xend = Date), data = timeline2, yend = 0,
                size = 0.08, alpha = 0.5) + 
   geom_segment(aes(x = Date[1] - 60, y = 0, xend = Date[length(Date)] + 60), data = timeline2, yend = 0,
                size = 0.08, alpha = 0.5) + 
@@ -122,12 +131,18 @@ timeline <- ggplot() +
                size = 0.08, alpha = 0.5) + 
   #year lines
   geom_segment(aes(x = date, y = 0, xend = date, yend = -.1), data = years, size = 0.08, alpha = 0.5) + 
-  geom_point(aes(x = Date, y = Disp, color = Type), data = timeline2, size = 2) +
-  scale_color_manual(values = c("#CC2810", "#0000FF", "#4B4B4B")) + 
+  geom_point(aes(x = Date, y = Disp2, color = Type), data = timeline2, size = 2) +
+  geom_text(aes(x = Date, y = Disp2, label = Event), 
+            data = filter(timeline2, Type == "AQAP offensive"),
+            vjust = -0.2, size = 3.2) + 
+  #geom_text(aes(x = Date, y = Disp, label = Event), data = filter(timeline, CT == 1),
+  #          vjust = -0.2, size = 3.2) +
+  #scale_color_manual(values = c("#DD5044", "#1AA260", "#FFCE43")) + 
+  scale_color_manual(values = c("#468DFF", "#CC2810", "#C3FF1C")) + 
   scale_x_date(limits = c(timeline2$Date[1] - 90, timeline2$Date[length(timeline2$Date)] + 90),
                date_breaks = "1 year", date_labels = "%Y") + 
-  ylim(-0.1, 2.1) + 
-  labs(title = "Timeline of events") + 
+  #ylim(-0.1, 2) + 
+  labs(title = "A timeline of events") + 
   theme_minimal() + 
   theme(axis.title.x = element_blank(),
     axis.title.y = element_blank(),
@@ -143,7 +158,61 @@ ptimeline <- plotly_build(timeline)
 ptimeline$x$layout$legend$x <- c(0.05)
 ptimeline$x$layout$legend$y <- c(0.98)
 
+#lists of descriptions based on event type
+ct_desc <- timeline2 %>%
+  filter(Type == "Counter-terror operation") %>%
+  select(Description) %>%
+  transform(Description = as.character(Description))
+offensive_desc <- c(offensive_desc)
+
+offensive_desc <- timeline2 %>%
+  filter(Type == "AQAP offensive") %>%
+  select(Description) %>%
+  transform(Description = as.character(Description))
+offensive_desc <- c(offensive_desc)
+
+pub_desc <- timeline2 %>%
+  filter(Type == "Inspire publication") %>%
+  select(Description) %>%
+  transform(Description = as.character(Description))
+pub_desc <- c(pub_desc)
+
+ptimeline$x$data[[1]]$text <- ""
+ptimeline$x$data[[2]]$text <- ""
+ptimeline$x$data[[3]]$text <- ""
+ptimeline$x$data[[4]]$text <- ""
+ptimeline$x$data[[5]]$text <- ""
+#ptimeline$x$data[[6]]$text <- "look I'm blue"
+ptimeline$x$data[[7]]$text[1] <- offensive_desc$Description[[1]]
+ptimeline$x$data[[7]]$text[2] <- offensive_desc$Description[[2]]
+ptimeline$x$data[[7]]$text[3] <- offensive_desc$Description[[3]]
+ptimeline$x$data[[7]]$text[4] <- offensive_desc$Description[[4]]
+#publication events
+ptimeline$x$data[[8]]$text[1] <- pub_desc$Description[[1]]
+ptimeline$x$data[[8]]$text[2] <- pub_desc$Description[[2]]
+ptimeline$x$data[[8]]$text[3] <- pub_desc$Description[[3]]
+ptimeline$x$data[[8]]$text[4] <- pub_desc$Description[[4]]
+ptimeline$x$data[[8]]$text[5] <- pub_desc$Description[[5]]
+ptimeline$x$data[[8]]$text[6] <- pub_desc$Description[[6]]
+ptimeline$x$data[[8]]$text[7] <- pub_desc$Description[[7]]
+ptimeline$x$data[[8]]$text[8] <- pub_desc$Description[[8]]
+ptimeline$x$data[[8]]$text[9] <- pub_desc$Description[[9]]
+ptimeline$x$data[[8]]$text[10] <- pub_desc$Description[[10]]
+ptimeline$x$data[[8]]$text[11] <- pub_desc$Description[[11]]
+ptimeline$x$data[[8]]$text[12] <- pub_desc$Description[[12]]
+ptimeline$x$data[[8]]$text[13] <- pub_desc$Description[[13]]
+ptimeline$x$data[[8]]$text[14] <- pub_desc$Description[[14]]
+ptimeline$x$data[[8]]$text[15] <- pub_desc$Description[[15]]
+ptimeline$x$data[[8]]$text[16] <- pub_desc$Description[[16]]
+
+#cleanup
+ptimeline$x$data[[9]]$text <- ""
+ptimeline$x$data[[9]]$hovertext <- ""
+
 ptimeline
+
+ptimeline$x$data$hovertext
+ptimeline$x$data[[1]]$text
 ```
 
 
