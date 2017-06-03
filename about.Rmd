@@ -16,8 +16,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
 theme_set(theme_minimal())
 
-hist <- read.csv("Data/inspire_issues.csv") %>%
-  rename(Issue = `ï..Issue`)
+hist <- read.csv("Data/inspire_issues.csv")
 ```
 
 > ...And inspire the believers
@@ -132,16 +131,17 @@ timeline <- ggplot() +
   #year lines
   geom_segment(aes(x = date, y = 0, xend = date, yend = -.1), data = years, size = 0.08, alpha = 0.5) + 
   geom_point(aes(x = Date, y = Disp2, color = Type), data = timeline2, size = 2) +
+  #angle doesn't work in plotly
   geom_text(aes(x = Date, y = Disp2, label = Event), 
             data = filter(timeline2, Type == "AQAP offensive"),
-            vjust = -0.2, size = 3.2) + 
-  #geom_text(aes(x = Date, y = Disp, label = Event), data = filter(timeline, CT == 1),
-  #          vjust = -0.2, size = 3.2) +
-  #scale_color_manual(values = c("#DD5044", "#1AA260", "#FFCE43")) + 
+            size = 3.2, nudge_y = 0.3) + 
+  geom_text(aes(x = Date, y = Disp2, label = Event), 
+            data = filter(timeline2, Type == "Counter-terror operation"),
+            size = 3.2, nudge_y = 0.3) + 
   scale_color_manual(values = c("#468DFF", "#CC2810", "#C3FF1C")) + 
   scale_x_date(limits = c(timeline2$Date[1] - 90, timeline2$Date[length(timeline2$Date)] + 90),
                date_breaks = "1 year", date_labels = "%Y") + 
-  #ylim(-0.1, 2) + 
+  ylim(-0.1, 4.5) + 
   labs(title = "A timeline of events") + 
   theme_minimal() + 
   theme(axis.title.x = element_blank(),
@@ -155,15 +155,18 @@ timeline <- ggplot() +
 
 ptimeline <- plotly_build(timeline)
 
-ptimeline$x$layout$legend$x <- c(0.05)
-ptimeline$x$layout$legend$y <- c(0.98)
+ptimeline$x$layout$legend$x <- c(0.55)
+ptimeline$x$layout$legend$y <- c(1)
+ptimeline$x$layout$annotations[[1]]$legendTitle <- FALSE
+ptimeline$x$layout$annotations[[1]]$text <- NULL
+ptimeline$x$layout$annotations[[1]] <- NULL
 
 #lists of descriptions based on event type
 ct_desc <- timeline2 %>%
   filter(Type == "Counter-terror operation") %>%
   select(Description) %>%
   transform(Description = as.character(Description))
-offensive_desc <- c(offensive_desc)
+ct_desc <- c(ct_desc)
 
 offensive_desc <- timeline2 %>%
   filter(Type == "AQAP offensive") %>%
@@ -182,11 +185,21 @@ ptimeline$x$data[[2]]$text <- ""
 ptimeline$x$data[[3]]$text <- ""
 ptimeline$x$data[[4]]$text <- ""
 ptimeline$x$data[[5]]$text <- ""
-#ptimeline$x$data[[6]]$text <- "look I'm blue"
+#counter-terror events
+ptimeline$x$data[[6]]$text[1] <- ct_desc$Description[[1]]
+ptimeline$x$data[[6]]$text[2] <- ct_desc$Description[[2]]
+ptimeline$x$data[[6]]$text[3] <- ct_desc$Description[[3]]
+ptimeline$x$data[[6]]$text[4] <- ct_desc$Description[[4]]
+ptimeline$x$data[[6]]$text[5] <- ct_desc$Description[[5]]
+#AQAP offensive events
 ptimeline$x$data[[7]]$text[1] <- offensive_desc$Description[[1]]
 ptimeline$x$data[[7]]$text[2] <- offensive_desc$Description[[2]]
 ptimeline$x$data[[7]]$text[3] <- offensive_desc$Description[[3]]
 ptimeline$x$data[[7]]$text[4] <- offensive_desc$Description[[4]]
+ptimeline$x$data[[7]]$text[5] <- offensive_desc$Description[[5]]
+ptimeline$x$data[[7]]$text[6] <- offensive_desc$Description[[6]]
+ptimeline$x$data[[7]]$text[7] <- offensive_desc$Description[[7]]
+ptimeline$x$data[[7]]$text[8] <- offensive_desc$Description[[8]]
 #publication events
 ptimeline$x$data[[8]]$text[1] <- pub_desc$Description[[1]]
 ptimeline$x$data[[8]]$text[2] <- pub_desc$Description[[2]]
@@ -206,13 +219,10 @@ ptimeline$x$data[[8]]$text[15] <- pub_desc$Description[[15]]
 ptimeline$x$data[[8]]$text[16] <- pub_desc$Description[[16]]
 
 #cleanup
-ptimeline$x$data[[9]]$text <- ""
-ptimeline$x$data[[9]]$hovertext <- ""
+ptimeline$x$data[[9]]$hovertext <- NULL
+ptimeline$x$data[[10]]$hovertext <- NULL
 
 ptimeline
-
-ptimeline$x$data$hovertext
-ptimeline$x$data[[1]]$text
 ```
 
 
