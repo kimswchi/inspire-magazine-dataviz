@@ -1,0 +1,83 @@
+---
+title: "Content"
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(knitr)
+library(plotly)
+library(scales)
+library(ggthemes)
+library(lubridate)
+library(knitr)
+library(stringr)
+
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+theme_set(theme_minimal())
+
+catalogue <- read.csv("Data/inspire_catalogue.csv") %>%
+  transform(Issue = as.double(Issue)) %>%
+  transform(NumPages = as.double(NumPages)) %>%
+  transform(ItemType = as.character(ItemType)) %>%
+  transform(ItemType = ifelse(ItemType %in% c("Poetry", "Photography"), "Art and Poetry", ItemType)) %>%
+  transform(ItemType = as.factor(ItemType)) %>%
+  transform(AuthorName = as.character(AuthorName)) %>%
+  transform(AuthorName = ifelse(AuthorName == "Usama Bin Laden", "Usama bin Laden", AuthorName)) %>%
+  transform(AuthorName = ifelse(AuthorName == "AQ Chef", "'AQ Chef'", AuthorName)) %>%
+  transform(AuthorName = ifelse(AuthorName == "Terr0r1st", "'Terr0r1st'", AuthorName))
+```
+
+I categorized each discrete item in each section of each issue into one of the following:
+
+* **Ideology** includes written pieces that seek to explain, clarify, justify, promote, or enforce the group's political or religious ideology. These primarily include religious sermons, messages to the public and/or enemy governments, and addresses by group leaders calling for jihad. Very short messages accompanied by graphics are considered Advertisement rather than Idoelogy.
+* **How-To Guides** include guides and tutorials for carrying out acts of terrorism. Each issue typically has an *Open Source Jihad* section that deals with domestic terrorism, with guides on bomb-making, weapon usage, and covert communication. Some issues also have travel guides that discuss best practices for waging jihad abroad.
+* **News** includes official statements from al-Qaeda and descriptions of current events. This category also includes sections dedicated to quotes from enemy actors, media outlets, and members of the public.
+* **Advertisement** includes product placements and other ads. Typical product placements are for upcoming interviews and new video releases. Other ads are typically propaganda posters encouraging violence or making fun of enemy leaders. 
+* **Opinion** includes opinion pieces typically placed under an "Opinion" heading. These reflect the thoughts opinions of individual writers rather than the group's official position. Writings by deceased or current group leaders and prominent ideologues (e.g. Usama bin Laden, Anwar al-Awlaki, Samir Khan) were generally considered to reflect the official AQAP position and thus not placed in this category.
+* **Strategy** reflects the group's military strategy. This category includes military analysis of operations and discussions of the group's overall military strategy or favored tactics. It also includes hit lists and other calls for specific violent acts against the enemy.
+* **Eulogy/Martyrology** include writings that praise and commemorate deceased or imprisoned individuals considered to be martyrs for the cause. These do not include poems commemorating martyrs, which are included in the Art and Poetry category instead.
+* **Art and Poetry** mainly include poems and photography. It also includes short stories.
+* **History** includes historical analysis and timelines.
+* **Testimony** includes first-person narrations by group members. These typically deal with their experiences in jihad and reasons for joining AQAP.
+* **Interview** includes interviews with prominent group members.
+* **Other** includes responses to inquiries by readers, general life advice, and other miscellaneous items.
+
+The following chart shows the distribution of each category by number of pages across all sixteen issues. Hover over the points to see examples from each category.
+
+```{r content_aggregate}
+cat_type <- catalogue %>%
+  group_by(ItemType) %>%
+  summarize(SumPages = sum(NumPages)) %>%
+  arrange(desc(SumPages)) %>%
+  mutate(TotPages = sum(SumPages)) %>%
+  mutate(page_freq_weight = SumPages/TotPages) %>%
+  transform(ItemType = as.factor(ItemType)) %>%
+  transform(ItemType = factor(ItemType, levels = ItemType))
+
+cat_all <- ggplot(cat_type, aes(ItemType, page_freq_weight)) + 
+  geom_point(color = "#4f86f7", size = 2) + 
+  geom_segment(aes(x = ItemType, y = 0, xend = ItemType, yend = page_freq_weight - 0.005),
+               color = "#C0C0C0") + 
+  labs(title = "Distribution of categories",
+       x = "Category", y = "Percentage of all pages") + 
+  scale_y_continuous(limits = c(0, 0.3), breaks = seq(0, 0.3, .1), labels=percent) + 
+  #scale_color_manual(values = c("#AA4499", "#882255", "#AA4466", "#CC6677", "#661100", "#DDCC77", "#999933", #"#117733", "#44AA99", "#88CCEE", "#6699CC", "#332288")) + 
+  theme(panel.grid.major.x = element_blank(),
+        axis.text.x = element_text(angle = -60, hjust = 0.3),
+        axis.title.x = element_blank())
+
+pcat_all <- plotly_build(cat_all)
+
+pcat_all$x$layout$autosize <- FALSE
+pcat_all$x$layout$width <- 700
+pcat_all$x$layout$height <- 432
+pcat_all$x$layout$margin$b <- 120
+pcat_all$x$layout$margin$l <- 60
+pcat_all$x$layout$showlegend <- FALSE
+pcat_all$x$data[[1]]$text[4] <- "From issue 1:\n\n''Ready to purchase your favorite shoes?\nFirst spend on those who deserve a share of your wealth...\n<And gives wealth, in spite of love for it, to relatives, orphans, the needy,\nthe traveler, those who ask [for help], and for freeing slaves [al-Baqarah: 177]>''\n\nFrom issue 8:\n\n''THERE'S ONLY ONE WAY\n<FIGHT those adjacent to you of the kuffar\nand let them find in you HARSHNESS [9:123]>''\n\n''The Arab Intifada\nHopes, Concerns & Dangers\nAn Exclusive Interview with\nAdam Yahiye Gadahn (Azzam al-Amriki)\ncoming soon''"
+pcat_all$x$data[[2]]$text <- ""
+
+pcat_all
+```
+
