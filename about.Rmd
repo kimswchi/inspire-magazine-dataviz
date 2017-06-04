@@ -180,4 +180,3 @@ ptimeline$x$data[[10]]$hovertext <- NULL
 ptimeline
 ```
 
-

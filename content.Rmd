@@ -43,7 +43,7 @@ I categorized each discrete item in each section of each issue into one of the f
 * **Interview** includes interviews with prominent group members.
 * **Other** includes responses to inquiries by readers, general life advice, and other miscellaneous items.
 
-The following chart shows the distribution of each category by number of pages across all sixteen issues. Hover over the points to see examples from each category.
+The following chart shows the distribution of each category by number of pages across all sixteen issues. 
 
 ```{r content_aggregate}
 cat_type <- catalogue %>%
@@ -53,8 +53,10 @@ cat_type <- catalogue %>%
   mutate(TotPages = sum(SumPages)) %>%
   mutate(page_freq_weight = SumPages/TotPages) %>%
   transform(ItemType = as.factor(ItemType)) %>%
-  transform(ItemType = factor(ItemType, levels = ItemType))
-
+  transform(ItemType = factor(ItemType, levels = ItemType)) %>%
+  transform(perc = round(page_freq_weight*100,1))
+  #transform(desc = paste0("Number of pages: ", SumPages, "% of all pages: ", perc))
+  
 cat_all <- ggplot(cat_type, aes(ItemType, page_freq_weight)) + 
   geom_point(color = "#4f86f7", size = 2) + 
   geom_segment(aes(x = ItemType, y = 0, xend = ItemType, yend = page_freq_weight - 0.005),
@@ -75,9 +77,95 @@ pcat_all$x$layout$height <- 432
 pcat_all$x$layout$margin$b <- 120
 pcat_all$x$layout$margin$l <- 60
 pcat_all$x$layout$showlegend <- FALSE
-pcat_all$x$data[[1]]$text[4] <- "From issue 1:\n\n''Ready to purchase your favorite shoes?\nFirst spend on those who deserve a share of your wealth...\n<And gives wealth, in spite of love for it, to relatives, orphans, the needy,\nthe traveler, those who ask [for help], and for freeing slaves [al-Baqarah: 177]>''\n\nFrom issue 8:\n\n''THERE'S ONLY ONE WAY\n<FIGHT those adjacent to you of the kuffar\nand let them find in you HARSHNESS [9:123]>''\n\n''The Arab Intifada\nHopes, Concerns & Dangers\nAn Exclusive Interview with\nAdam Yahiye Gadahn (Azzam al-Amriki)\ncoming soon''"
+pcat_all$x$data[[1]]$text <- paste0("Number of pages: ", cat_type$SumPages, "<br />", "% of all pages: ", cat_type$perc)
 pcat_all$x$data[[2]]$text <- ""
 
 pcat_all
+```
+
+```{r content_by_issue}
+cat_issue_type <- catalogue %>%
+  group_by(Issue, ItemType) %>%
+  summarize(SumPages = sum(NumPages)) %>%
+  ungroup()
+
+find_missing_type <- function(issue) {
+  data = dplyr::filter(cat_issue_type, Issue == issue)
+  TypeList = data$ItemType
+  missing = cat_type$ItemType[!cat_type$ItemType %in% TypeList]
+  
+  return(missing)
+}
+
+make_row <- function(issue, missing_type) {
+  row = t(as_tibble(c(issue, missing_type, 0)))
+  colnames(row) <- c("Issue", "ItemType", "SumPages")
+  row = as.data.frame(row)
+  rownames(row) <- NULL
+  return(row)
+}
+
+make_rows <- function(issue) {
+  missing = find_missing_type(issue)
+  missing_rows = make_row(issue, as.character(missing[1]))
+  if (length(missing) > 1) {
+    for (x in tail(missing, -1)) {
+    missing_rows = rbind(missing_rows, make_row(issue, as.character(x)))
+    }
+  }
+  else {
+    missing_rows = missing_rows
+  }
+  
+  return(missing_rows)
+}
+
+missing_rows <- make_rows(1)
+for (x in seq(2,16)) {
+  missing_rows <- rbind(missing_rows, make_rows(x))
+}
+
+missing_rows <- missing_rows %>%
+  transform(Issue = as.numeric(Issue)) %>%
+  transform(SumPages = as.numeric(SumPages) - 1)
+
+cat_issue_type <- rbind(cat_issue_type, missing_rows) %>%
+  arrange(Issue) %>%
+  na.omit()
+
+TotPages <- catalogue %>%
+  group_by(Issue) %>%
+  summarize(TotalPages = sum(NumPages))
+
+cat_issue_type <- left_join(cat_issue_type, TotPages) %>%
+  mutate(SharePages = SumPages/TotalPages)
+
+rep1 <- cat_issue_type %>%
+  transform(Issue = Issue + 0.5)
+
+rep2 <- cat_issue_type %>%
+  transform(Issue = Issue + 0.9999)
+
+cat_join <- bind_rows(cat_issue_type, rbind(rep1, rep2)) %>%
+  transform(ItemType = as.factor(ItemType)) %>%
+  transform(ItemType = factor(ItemType, levels = rev(cat_type$ItemType)))
+
+cat_issue <- ggplot(cat_join, aes(x=Issue, y=SharePages, fill=ItemType)) + 
+  geom_area(color = "white") + 
+  scale_x_continuous(breaks = seq(1.5, 16.5, 1), labels = seq(1, 16, 1)) + 
+  scale_y_continuous(labels = percent_format()) + 
+  labs(title = "Share of pages per category, by issue",
+       x = "Issue", y = "Percentage of total",
+       fill = "Category") + 
+  scale_fill_ptol() + 
+  theme_classic()
+
+pcat_issue <- plotly_build(cat_issue)
+
+pcat_issue
+```
+
+```{r content by issue line plot}
+
 ```
 
