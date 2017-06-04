@@ -80,11 +80,9 @@ pcat_all$x$layout$margin$l <- 60
 pcat_all$x$layout$showlegend <- FALSE
 pcat_all$x$data[[1]]$text <- paste0("Number of pages: ", cat_type$SumPages, "<br />", "% of all pages: ", cat_type$perc)
 pcat_all$x$data[[2]]$text <- ""
-```
 
-\begin{center}
-Title
-\end{center}
+pcat_all
+```
 
 ```{r content_by_issue}
 cat_issue_type <- catalogue %>%
@@ -191,9 +189,4 @@ streamgraph(cat_issue_type, "ItemType", "SumPages", "Issue",
 ```
 
 The following chart shows the distribution of each category by number of pages across all sixteen issues.
-
-```{r agg plot}
-#only here because I get a huge blank space between the graphs if this plot goes first
-pcat_all
-```
 

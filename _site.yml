@@ -8,8 +8,8 @@ navbar:
       href: about.html
     - text: "Content"
       href: content.html
-#    - text: "Authorship"
-#      href: authorship.html
+    - text: "Authorship"
+      href: authorship.html
 output:
   html_document:
     theme: readable
