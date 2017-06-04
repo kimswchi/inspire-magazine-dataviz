@@ -44,8 +44,6 @@ I categorized each discrete item in each section of each issue into one of the f
 * **Interview** includes interviews with prominent group members.
 * **Other** includes responses to inquiries by readers, general life advice, and other miscellaneous items.
 
-The following chart shows the distribution of each category by number of pages across all sixteen issues. 
-
 ```{r content_aggregate}
 cat_type <- catalogue %>%
   group_by(ItemType) %>%
@@ -61,7 +59,9 @@ cat_type <- catalogue %>%
 cat_all <- ggplot(cat_type, aes(ItemType, page_freq_weight)) + 
   geom_point(color = "#4f86f7", size = 2) + 
   geom_segment(aes(x = ItemType, y = 0, xend = ItemType, yend = page_freq_weight - 0.005),
-               color = "#C0C0C0") + 
+               color = "#999999") + 
+  #4f86f7, #0829E4 <- blueberries
+  #C0C0C0 <- stalks
   labs(title = "Distribution of categories",
        x = "Category", y = "Percentage of all pages") + 
   scale_y_continuous(limits = c(0, 0.3), breaks = seq(0, 0.3, .1), labels=percent) + 
@@ -80,9 +80,11 @@ pcat_all$x$layout$margin$l <- 60
 pcat_all$x$layout$showlegend <- FALSE
 pcat_all$x$data[[1]]$text <- paste0("Number of pages: ", cat_type$SumPages, "<br />", "% of all pages: ", cat_type$perc)
 pcat_all$x$data[[2]]$text <- ""
-
-pcat_all
 ```
+
+\begin{center}
+Title
+\end{center}
 
 ```{r content_by_issue}
 cat_issue_type <- catalogue %>%
@@ -138,18 +140,24 @@ TotPages <- catalogue %>%
   group_by(Issue) %>%
   summarize(TotalPages = sum(NumPages))
 
+cat_type_filt <- cat_type %>%
+  transform(ItemType = as.character(ItemType)) %>%
+  filter(ItemType != "Other") %>%
+  transform(ItemType = factor(ItemType, levels = ItemType))
+
 cat_issue_type <- left_join(cat_issue_type, TotPages) %>%
   mutate(SharePages = SumPages/TotalPages) %>%
-  #transform(ItemType = factor(ItemType, levels = rev(cat_type$ItemType))) %>%
+  filter(ItemType != "Other") %>%
+  transform(ItemType = factor(ItemType, levels = rev(cat_type_filt$ItemType))) %>%
   #streamgraph 
-  transform(ItemType = factor(ItemType, levels = cat_type$ItemType)) %>%
+  #transform(ItemType = factor(ItemType, levels = cat_type$ItemType)) %>%
   mutate(perc = round(SharePages*100,1))
 
 streamgraph(cat_issue_type, "ItemType", "SumPages", "Issue",
             scale="continuous", offset="zero", interpolate="cardinal") %>%
   sg_legend(show=TRUE, label="Category: ") %>%
   sg_axis_x(tick_format="d") %>%
-  sg_fill_brewer(palette = "Set3")
+  sg_fill_brewer(palette = "Paired")
 
 #"tetris" plot
 #rep1 <- cat_issue_type %>%
@@ -182,7 +190,10 @@ streamgraph(cat_issue_type, "ItemType", "SumPages", "Issue",
 #pcat_issue
 ```
 
-```{r content by issue line plot}
+The following chart shows the distribution of each category by number of pages across all sixteen issues.
 
+```{r agg plot}
+#only here because I get a huge blank space between the graphs if this plot goes first
+pcat_all
 ```
 
