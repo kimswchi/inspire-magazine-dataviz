@@ -11,6 +11,7 @@ library(ggthemes)
 library(lubridate)
 library(knitr)
 library(stringr)
+library(streamgraph)
 
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
@@ -138,31 +139,47 @@ TotPages <- catalogue %>%
   summarize(TotalPages = sum(NumPages))
 
 cat_issue_type <- left_join(cat_issue_type, TotPages) %>%
-  mutate(SharePages = SumPages/TotalPages)
+  mutate(SharePages = SumPages/TotalPages) %>%
+  #transform(ItemType = factor(ItemType, levels = rev(cat_type$ItemType))) %>%
+  #streamgraph 
+  transform(ItemType = factor(ItemType, levels = cat_type$ItemType)) %>%
+  mutate(perc = round(SharePages*100,1))
 
-rep1 <- cat_issue_type %>%
-  transform(Issue = Issue + 0.5)
+streamgraph(cat_issue_type, "ItemType", "SumPages", "Issue",
+            scale="continuous", offset="zero", interpolate="cardinal") %>%
+  sg_legend(show=TRUE, label="Category: ") %>%
+  sg_axis_x(tick_format="d") %>%
+  sg_fill_brewer(palette = "Set3")
 
-rep2 <- cat_issue_type %>%
-  transform(Issue = Issue + 0.9999)
+#"tetris" plot
+#rep1 <- cat_issue_type %>%
+#  transform(Issue = Issue + 0.5)
 
-cat_join <- bind_rows(cat_issue_type, rbind(rep1, rep2)) %>%
-  transform(ItemType = as.factor(ItemType)) %>%
-  transform(ItemType = factor(ItemType, levels = rev(cat_type$ItemType)))
+#rep2 <- cat_issue_type %>%
+#  transform(Issue = Issue + 0.9999)
 
-cat_issue <- ggplot(cat_join, aes(x=Issue, y=SharePages, fill=ItemType)) + 
-  geom_area(color = "white") + 
-  scale_x_continuous(breaks = seq(1.5, 16.5, 1), labels = seq(1, 16, 1)) + 
-  scale_y_continuous(labels = percent_format()) + 
-  labs(title = "Share of pages per category, by issue",
-       x = "Issue", y = "Percentage of total",
-       fill = "Category") + 
-  scale_fill_ptol() + 
-  theme_classic()
+#cat_join <- bind_rows(cat_issue_type, rbind(rep1, rep2)) %>%
+#  transform(ItemType = as.factor(ItemType)) %>%
+#  transform(ItemType = factor(ItemType, levels = rev(cat_type$ItemType)))
+#
+#cat_issue <- ggplot(cat_join, aes(x=Issue, y=SharePages, fill=ItemType)) + 
+#  geom_area(color = "white") + 
+#  scale_x_continuous(breaks = seq(1.5, 16.5, 1), labels = seq(1, 16, 1)) + 
+#  scale_y_continuous(labels = percent_format()) + 
+#  labs(title = "Share of pages per category, by issue",
+#       x = "Issue", y = "Percentage of total",
+#       fill = "Category") + 
+#  scale_fill_ptol() + 
+#  theme_classic() + 
+#  coord_flip()
 
-pcat_issue <- plotly_build(cat_issue)
+#pcat_issue <- plotly_build(cat_issue)
 
-pcat_issue
+#pcat_issue$x$layout$autosize <- FALSE
+#pcat_issue$x$layout$width <- 700
+#pcat_issue$x$layout$height <- 432
+
+#pcat_issue
 ```
 
 ```{r content by issue line plot}
