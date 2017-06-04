@@ -2,7 +2,7 @@
 
 This project visualizes various aspects of *Inspire*, an online English-language magazine produced by al-Qaeda affiliate al-Qaeda in the Arabian Peninsula.
 
-The current version of the visualization is hosted [here](https://kimswchi.github.io/inspire-magazine-dataviz/)
+The current version of the visualization is hosted [here](https://kimswchi.github.io/inspire-magazine-dataviz/).
 
 The packages used for the project are listed in `package_versions.md`.
 
