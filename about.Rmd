@@ -106,6 +106,10 @@ timeline <- ggplot() +
 
 ptimeline <- plotly_build(timeline)
 
+ptimeline$x$layout$autosize <- FALSE
+ptimeline$x$layout$width <- 700
+ptimeline$x$layout$height <- 432
+
 ptimeline$x$layout$legend$x <- c(0.55)
 ptimeline$x$layout$legend$y <- c(1)
 ptimeline$x$layout$annotations[[1]]$legendTitle <- FALSE
