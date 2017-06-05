@@ -48,8 +48,8 @@ authors_all_issues <- catalogue %>%
 
 To determine how much of *Inspire* is original rather than borrowed, I coded each item* according to the following criteria:
 
-* No (Not original) - The piece cites a work that was previously published, such as a book or an excerpt from a lecture given by an al-Qaeda leader. I also coded No if the author was deceased for at least several months at the time of the issue's publication.
-* Yes (Original) - The piece does not cite any previously published work and it is not known if the author has died.
+* **No (Not original)** - The piece cites a work that was previously published, such as a book or an excerpt from a lecture given by an al-Qaeda leader. I also coded No if the author was deceased for at least several months at the time of the issue's publication.
+* **Yes (Original)** - The piece does not cite any previously published work and it is not known if the author has died.
 
 (*I excluded any content that was not primarily textual in nature or contained minimal writing. Thus, I leave out advertisements, photography, hit lists, and timelines.)
 

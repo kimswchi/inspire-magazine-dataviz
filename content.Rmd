@@ -32,7 +32,7 @@ catalogue <- read.csv("Data/inspire_catalogue.csv") %>%
 
 To analyze the content of the magazine I categorized each discrete item (article, advertisement, poem, photo essay, etc.) in each issue into one of the following:
 
-* **Ideology** - Written pieces that seek to explain, clarify, justify, promote, or enforce the group's political or religious ideology. These primarily include religious sermons, messages to the public and/or enemy governments, and addresses by group leaders calling for jihad. Very short messages accompanied by graphics are considered Advertisement rather than Idoelogy.
+* **Ideology** - Written pieces that seek to explain, clarify, justify, promote, or enforce the group's political or religious ideology. These primarily include religious sermons, messages to the public and/or enemy governments, and addresses by group leaders calling for jihad. Very short messages accompanied by graphics are considered Advertisement rather than Ideology.
 * **How-To Guides** - Guides and tutorials for carrying out acts of terrorism. Each issue typically has an *Open Source Jihad* section that deals with domestic terrorism, with guides on bomb-making, weapon usage, and covert communication. Some issues also have travel guides that discuss best practices for waging jihad abroad.
 * **News** - Official statements from al-Qaeda and descriptions of current events. This category also includes sections dedicated to quotes from enemy actors, media outlets, and members of the public.
 * **Advertisement** - Product placements and other ads. Typical product placements are for upcoming interviews and new video releases. Other ads are typically propaganda posters encouraging violence or making fun of enemy leaders. 
