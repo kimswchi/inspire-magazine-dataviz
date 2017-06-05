@@ -12,6 +12,7 @@ library(lubridate)
 library(knitr)
 library(stringr)
 library(streamgraph)
+library(kableExtra)
 
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
@@ -29,20 +30,22 @@ catalogue <- read.csv("Data/inspire_catalogue.csv") %>%
   transform(AuthorName = ifelse(AuthorName == "Terr0r1st", "'Terr0r1st'", AuthorName))
 ```
 
-I categorized each discrete item in each section of each issue into one of the following:
+To analyze the content of the magazine I categorized each discrete item (article, advertisement, poem, photo essay, etc.) in each issue into one of the following:
 
-* **Ideology** includes written pieces that seek to explain, clarify, justify, promote, or enforce the group's political or religious ideology. These primarily include religious sermons, messages to the public and/or enemy governments, and addresses by group leaders calling for jihad. Very short messages accompanied by graphics are considered Advertisement rather than Idoelogy.
-* **How-To Guides** include guides and tutorials for carrying out acts of terrorism. Each issue typically has an *Open Source Jihad* section that deals with domestic terrorism, with guides on bomb-making, weapon usage, and covert communication. Some issues also have travel guides that discuss best practices for waging jihad abroad.
-* **News** includes official statements from al-Qaeda and descriptions of current events. This category also includes sections dedicated to quotes from enemy actors, media outlets, and members of the public.
-* **Advertisement** includes product placements and other ads. Typical product placements are for upcoming interviews and new video releases. Other ads are typically propaganda posters encouraging violence or making fun of enemy leaders. 
-* **Opinion** includes opinion pieces typically placed under an "Opinion" heading. These reflect the thoughts opinions of individual writers rather than the group's official position. Writings by deceased or current group leaders and prominent ideologues (e.g. Usama bin Laden, Anwar al-Awlaki, Samir Khan) were generally considered to reflect the official AQAP position and thus not placed in this category.
-* **Strategy** reflects the group's military strategy. This category includes military analysis of operations and discussions of the group's overall military strategy or favored tactics. It also includes hit lists and other calls for specific violent acts against the enemy.
-* **Eulogy/Martyrology** include writings that praise and commemorate deceased or imprisoned individuals considered to be martyrs for the cause. These do not include poems commemorating martyrs, which are included in the Art and Poetry category instead.
-* **Art and Poetry** mainly include poems and photography. It also includes short stories.
-* **History** includes historical analysis and timelines.
-* **Testimony** includes first-person narrations by group members. These typically deal with their experiences in jihad and reasons for joining AQAP.
-* **Interview** includes interviews with prominent group members.
-* **Other** includes responses to inquiries by readers, general life advice, and other miscellaneous items.
+* **Ideology** - Written pieces that seek to explain, clarify, justify, promote, or enforce the group's political or religious ideology. These primarily include religious sermons, messages to the public and/or enemy governments, and addresses by group leaders calling for jihad. Very short messages accompanied by graphics are considered Advertisement rather than Idoelogy.
+* **How-To Guides** - Guides and tutorials for carrying out acts of terrorism. Each issue typically has an *Open Source Jihad* section that deals with domestic terrorism, with guides on bomb-making, weapon usage, and covert communication. Some issues also have travel guides that discuss best practices for waging jihad abroad.
+* **News** - Official statements from al-Qaeda and descriptions of current events. This category also includes sections dedicated to quotes from enemy actors, media outlets, and members of the public.
+* **Advertisement** - Product placements and other ads. Typical product placements are for upcoming interviews and new video releases. Other ads are typically propaganda posters encouraging violence or making fun of enemy leaders. 
+* **Opinion** - Opinion pieces typically placed under an "Opinion" heading. These reflect the thoughts opinions of individual writers rather than the group's official position. Writings by deceased or current group leaders and prominent ideologues (e.g. Usama bin Laden, Anwar al-Awlaki, Samir Khan) were generally considered to reflect the official AQAP position and thus not placed in this category.
+* **Strategy** - Writings that reflect the group's military strategy. This category includes military analysis of operations and discussions of the group's overall military strategy or favored tactics. It also includes hit lists and other calls for specific violent acts against the enemy.
+* **Eulogy/Martyrology** - Writings that praise and commemorate deceased or imprisoned individuals considered to be martyrs for the cause. These do not include poems commemorating martyrs, which are included in the Art and Poetry category instead.
+* **Art and Poetry** - Mainly poems and photography. Also includes short stories.
+* **History** - Historical analysis and timelines.
+* **Testimony** - First-person narrations by group members. These typically deal with their experiences in jihad and reasons for joining AQAP.
+* **Interview** - Interviews with prominent group members.
+* **Other** - Responses to inquiries by readers, general life advice, and other miscellaneous items.
+
+Excluding the front and back covers, the contact information page, the table of contents, and letters from the editor, I counted a total of 915 pages across all sixteen issues of *Inspire*. The following chart shows the distribution of categories by number of pages across all issues. Hover over the blue dots to view the exact page counts and corresponding percentages.
 
 ```{r content_aggregate}
 cat_type <- catalogue %>%
@@ -62,8 +65,8 @@ cat_all <- ggplot(cat_type, aes(ItemType, page_freq_weight)) +
                color = "#999999") + 
   #4f86f7, #0829E4 <- blueberries
   #C0C0C0 <- stalks
-  labs(title = "Distribution of categories",
-       x = "Category", y = "Percentage of all pages") + 
+  labs(title = "Distribution of categories across all issues",
+       x = "Category", y = "Share of total number of pages") + 
   scale_y_continuous(limits = c(0, 0.3), breaks = seq(0, 0.3, .1), labels=percent) + 
   #scale_color_manual(values = c("#AA4499", "#882255", "#AA4466", "#CC6677", "#661100", "#DDCC77", "#999933", #"#117733", "#44AA99", "#88CCEE", "#6699CC", "#332288")) + 
   theme(panel.grid.major.x = element_blank(),
@@ -84,6 +87,11 @@ pcat_all$x$data[[2]]$text <- ""
 pcat_all
 ```
 
+Writings dealing with ideology and how-to guides take up the most amount of space across all issues, at 22.7% and 18.8% of all pages, respectively. News comes third with 11.8%. 
+
+The following chart shows the distribution of pages in each issue. Hover over the lines to see the exact page counts.
+
+#### Distribution of categories by issue
 ```{r content_by_issue}
 cat_issue_type <- catalogue %>%
   group_by(Issue, ItemType) %>%
@@ -188,5 +196,4 @@ streamgraph(cat_issue_type, "ItemType", "SumPages", "Issue",
 #pcat_issue
 ```
 
-The following chart shows the distribution of each category by number of pages across all sixteen issues.
-
+We can see that the share of pages by each category fluctuates from one issue to the next, but that Ideology and How-To guides generally take up a sizable share. There is also significant variation in the length of issues. An interesting case is issue 7, which was a shorter issue with a majority of the pages dedicated to photographs.

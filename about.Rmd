@@ -21,31 +21,34 @@ hist <- read.csv("Data/inspire_issues.csv")
 
 > ...And inspire the believers
 
-*Inspire* is an online English-language magazine published by one of al-Qaeda's main franchises, al-Qaeda in the Arabian Peninsula (AQAP). AQAP operates primarily in Yemen and Saudi Arabia, but has drawn attention for attempting various terrorist plots against Western targets in the Arabian peninsula and abroad. Since their creation in 2009, they have attempted multiple times to blow up planes and have conducted numerous deadly attacks against security personnel. In 2015, the group claimed responsibility for the shooting attack on the headquarters of the satirical newspaper Charlie Hebdo in Paris. 
+*Inspire* is an online English-language magazine published by one of al-Qaeda's main franchises, al-Qaeda in the Arabian Peninsula (AQAP). AQAP operates primarily in Yemen and Saudi Arabia, but has drawn attention for various terrorist plots against Western targets. Since their founding in 2009, they have carried out numerous deadly attacks, attempted assassinations, conquered territory in Yemen, and incited violence abroad with *Inspire* and other propaganda outlets. Notably, the group made credible claims to have trained and directed the two attackers of the 2015 shooting at headquarters of the satirical newspaper Charlie Hebdo in Paris. 
 
-![](pics/usama_small2.png)
+![The cover of issue 10 of Inspire magazine](pics/usama_small2.png)
 
-AQAP first published *Inspire* in July 2010, and currently there are 16 issues, the most recent having been issued in November 2016. A principal aim of *Inspire* is to recruit and mobilize helpers from English-speaking countries, and to encourage them to carry out attacks domestically as well as to join their militia in the Middle East. *Inspire* famously dedicates a section of each issue to a concept they call "Open Source Jihad", or detailed how-to-guides for conducting domestic terrorist attacks. Dzhokhar Tsarnaev, the surviving Boston marathon bomber, claimed to have learned bomb-making from one of the *Inspire* guides.
+AQAP published the first issue of *Inspire* in July 2010, and as of mid-2017 there are 16 issues, the most recent published in November 2016. A principal aim of *Inspire* is to recruit and mobilize co-conspirators from English-speaking countries, and to encourage them to carry out attacks domestically as well as to join their militia in the Middle East. *Inspire* famously dedicates a section of each issue to a concept they call "Open Source Jihad", or detailed how-to-guides for conducting domestic terrorist attacks. In fact, the Boston marathon bombers are believed to have used one of these guides to build the bombs used in their attack [1][2].
+
+The following table presents information on each issue, including the release date and number of pages.
 
 ```{r about_table}
-table <- hist %>%
+pubtable <- hist %>%
   select(Issue, CoverStory, ReleaseDate, TotalPages) %>%
-  transform(ReleaseDate = as.Date(ReleaseDate, "%m/%d/%y")) %>%
+  transform(ReleaseDate = as.character(ReleaseDate)) %>%
+  transform(ReleaseDate = as.Date(ReleaseDate, "%m/%d/%Y")) %>%
   mutate(ReleaseYear = as.character(year(ReleaseDate))) %>%
-  mutate(ReleaseMonth = month.abb[month(ReleaseDate)]) %>%
+  mutate(ReleaseMonth = as.character(month.abb[month(ReleaseDate)])) %>%
   transform(ReleaseDate = paste(ReleaseMonth, ReleaseYear)) %>%
   select(-ReleaseYear, -ReleaseMonth) %>%
   transform(CoverStory = as.character(CoverStory)) %>%
   transform(CoverStory = ifelse(Issue == 3, "$4,200", CoverStory))
 
-ktable <- table %>%
+ktable <- pubtable %>%
   kable(format = "html", col.names = c("Issue", "Cover Story", "Release Date", "# Pages"), align = 'l', table.attr = "style='width:100%;'")
 
 ktable %>%
   kable_styling(bootstrap_options = c("hover", "condensed"))
 ```
 
-Below is a timeline of issue releases with major offensives by AQAP and counter-offensives by the US and allies. Hover over the points to learn more.
+Below is a timeline of issue releases with major offensives by AQAP and counter-offensives by the US and allies. Hover over the colored dots to learn more.
 
 ```{r timeline}
 timeline2 <- read.csv("Data/timeline2.csv") %>%
@@ -180,3 +183,6 @@ ptimeline$x$data[[10]]$hovertext <- NULL
 ptimeline
 ```
 
+### References
+  1. Khan, Azmat. "The Magazine that "Inspired" the Boston Bombers." PBS. April 30, 2013. http://www.pbs.org/wgbh/frontline/article/the-magazine-that-inspired-the-boston-bombers/.
+  2. Valdmanis, Richard. "Boston bomb suspect influenced by Al Qaeda: expert witness." Reuters. March 23, 2015. Accessed June 04, 2017. http://www.reuters.com/article/us-boston-bombings-trial-idUSKBN0MJ0Z620150323.

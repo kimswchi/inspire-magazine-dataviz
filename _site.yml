@@ -10,6 +10,7 @@ navbar:
       href: content.html
     - text: "Authorship"
       href: authorship.html
+      
 output:
   html_document:
     theme: readable

@@ -2,18 +2,22 @@
 title: "About This Project"
 ---
 
+This website is a final project for [MACS 40700/Data Visualization (Spring 2017)](https://github.com/uc-cfss/dataviz) at the University of Chicago.
+
 ## Purpose
 
-This website serves as an interactive visual exploration of various aspects of a particularly salient terrorist publication, *Inspire* magazine produced by al-Qaeda's affiliate al-Qaeda in the Arabian Peninsula (AQAP). By visualizing data drawn from all current issues of the magazines, I hope to demystify some aspects of militant jihadist propaganda and dispel some misunderstandings that may arise due to unfamiliarity or media hype.
+This website serves as an interactive visual exploration of various aspects of *Inspire*, an online English-language magazine produced by al-Qaeda's affiliate al-Qaeda in the Arabian Peninsula. The specific questions that I address in this visualization are:
 
-The specific questions that I answer in this visualization are:
+* What categories and topics do the magazine cover and how does the coverage vary across issues? 
+* Who are the main contributors to the magazine? 
+* How much of the magazine's content is original? In other words, what proportion of articles are written specifically for *Inspire* and what proportion are drawn from other sources?
 
-* What is included in these issues? What categories are covered and how does the coverage change across issue? 
-* Who is involved? Who are the main contributors, and what is their role in al-Qaeda's network?
-* How much of the content is original? What proportion of articles are written specifically for *Inspire* or drawn from other sources?
+The answers to these questions hold practical implications for counter-terrorism efforts, but the visualization also provides an accessible and relatively non-alarmist peek into terrorist messaging for all members of the public.
 
-The answers to these questions hold practical implications for counter-terrorism, but the visualization also provides an accessible introduction to terrorist messaging for members of the public who are interested in the phenomenon.
+## Design concept
 
-## Design description
+Throughout the visualization, I employ a theme of "illuminating" - that is, shedding light on the issue at hand, and also rejecting terror itself. Thus, instead of accomodating the obscurity and darkness of the subject matter, I provide a contrast with a bright white background and luminescent hues. 
 
-Throughout the visualization, I employ a theme of "illuminating" - that is, shedding light on the issue at hand. That applies figuratively in the sense of providing information and producing insight and also somewhat literally in the color scheme. Instead of accomodating the inherent darkness of the material, I contrast it with a bright white background and pleasant jewel tones. Symbolically, this represents a refusal to be terrorized. In addition, I use interactive elements to engage the reader and provide more information than would be available using static images. 
+## Project information and contact
+
+[Link to GitHub repo](https://github.com/kimswchi/inspire-magazine-dataviz)

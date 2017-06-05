@@ -43,6 +43,18 @@ authors_all_issues <- catalogue %>%
   transform(AuthorName = as.factor(AuthorName)) %>%
   transform(AuthorName = factor(AuthorName, levels = AuthorName))
 ```
+
+### Original vs. Borrowed Content
+
+To determine how much of *Inspire* is original rather than borrowed, I coded each item* according to the following criteria:
+
+* No (Not original) - The piece cites a work that was previously published, such as a book or an excerpt from a lecture given by an al-Qaeda leader. I also coded No if the author was deceased for at least several months at the time of the issue's publication.
+* Yes (Original) - The piece does not cite any previously published work and it is not known if the author has died.
+
+(*I excluded any content that was not primarily textual in nature or contained minimal writing. Thus, I leave out advertisements, photography, hit lists, and timelines.)
+
+The following chart shows the percentage of original and non-original content per issue (out of total number of items). Hover over the tops of the bars to read the percentages.
+
 ```{r original_content}
 original <- catalogue %>%
   filter(!is.na(OriginalContent)) %>%
@@ -65,7 +77,8 @@ orig <- ggplot(original, aes(Issue, orig_freq_weight)) +
   labs(title = "Percentage of articles written for article, by issue",
        x = "Issue", y = "Percentage of articles",
        fill = "Original\nContent?") + 
-  scale_fill_manual(values = c("#4B0082", "#FFD700")) + 
+  scale_fill_manual(values = c("#4F2F4F", "#FFD700")) + 
+  #eggplant <- #4B0082
   scale_x_continuous(breaks = seq(1, 16, 1)) + 
   scale_y_continuous(labels = percent_format()) + 
   theme_classic() + 
@@ -85,11 +98,11 @@ porig$x$data[[2]]$text <- paste0("Issue ", origc$Issue, "<br />% original conten
 porig
 ```
 
-text yadadadada
+We can see that most of the items are previously unpublished content, presumably written specifically for *Inspire*. At the same time, a significant percentage of items (8.7% - 40%) are borrowed from external sources. However, this does not necessarily imply lack of originality or resourcefulness. For examaple, each issue of *Inspire* typically contains one or more sections containing quotes from the media, prominent individuals, and members of the public. These quotes represent global attitudes toward AQAP, *Inspire*, al-Qaeda, and the jihadist struggle in general. Thus, at times the use of borrowed material may be intentional and desirable.
 
-`r nrow(authors_all_issues)` (presumably) individual authors
+### Featured authors
 
-Hover over the red points to learn more about the authors
+Not counting indivduals featured in quotes sections, there were over 90 presumably distinct, individual authors that were featured in *Inspire*. The chart below shows the top 23 authors by number of times featured. Hover over the red dots to learn more about the authors.
 
 ```{r authors_chart}
 author_info <- read.csv("Data/author_info.csv", colClasses = c("factor", "character"))
@@ -119,4 +132,4 @@ pauthors$x$layout$margin$r <- 50
 pauthors
 ```
 
-text text
+Anwar al-Awlaki, a Yemeni/American preacher who had attracted a large international following with his audio series and lectures on Islam, is the most featured author with eleven different pieces of writing published in the magazine. This makes sense, as he was fluent in English and a prominent, albeit controversial, figure among Muslims in the West. The next four most featured, each with nine articles, are Usama bin Laden, Ayman al-Zawahiri, Samir Khan, and the "AQ Chef". Bin Laden and Zawahiri are also likely suspects, being the former and current heads of al-Qaeda, respectively. Samir Khan, like Awlaki, was an English-speaking ideologue relatively in touch with Western culture, as he spent most of his life in the US. The AQ Chef is the anonymous writer or group of writers responsible for the Open Source Jihad tutorials.
