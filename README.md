@@ -6,13 +6,5 @@ The current version of the visualization is hosted [here](https://kimswchi.githu
 
 The packages used for the project are listed in `package_versions.md`.
 
-### Note on reproducibility
-Using R v3.4.0 the graphs may not render correctly in HTML format. Specifically, the spacing around plotly figures may be larger than specified in the R code. If this is the case, check the source code for the rendered HTML and make sure the image size is specified correctly for the figures. If not, edit and save over the old HTML file.
-
-For example, change this
-
-`<div id="3a44e9b7042" style="width:1000px;height:900px;" class="plotly html-widget"></div>`
-
-to
-
-`<div id="3a44e9b7042" style="width:700px;height:432px;" class="plotly html-widget"></div>`
+#### Note:
+I don't know why there is a large blank space after every plotly graph. I edited the HTML source code and the html files when opened do not show the blank spaces. They only show up on the website.
